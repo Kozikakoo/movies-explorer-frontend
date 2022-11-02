@@ -1,0 +1,16 @@
+import React from "react";
+
+function Portfolio() {
+    return(
+        <section className="portfolio">
+            <h2 className="portfolio__title">Портфолио</h2>
+            <ul className="portfolio__list">
+                <li className="portfolio__item"><a className="portfolio__link" href="#">Статичный сайт</a><div className="portfolio__img-link"></div></li>
+                <li className="portfolio__item"><a className="portfolio__link" href="#">Адаптивный сайт</a><div className="portfolio__img-link"></div></li>
+                <li className="portfolio__item"><a className="portfolio__link" href="#">Одностраничное приложение</a><div className="portfolio__img-link"></div></li>
+            </ul>
+        </section>
+    )
+}
+
+export default Portfolio;
