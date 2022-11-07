@@ -1,0 +1,97 @@
+.form__container {
+    padding: 60px 440px 70px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    margin: 20px 0;
+}
+
+.form__label {
+    margin: 20px 0 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A0A0A0;
+}
+
+.form__input {
+    width: 396px;
+    height: 46px;
+    background: #F9F9F9;
+    border-radius: 8px;
+    border: none;
+}
+
+.form__submit-reg {
+    width: 396px;
+    height: 45px;
+    background: #3456F3;
+    border-radius: 3px;
+    border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 90px 0 30px;
+}
+
+.form__submit-log {
+    width: 396px;
+    height: 45px;
+    background: #3456F3;
+    border-radius: 3px;
+    border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 180px 0 30px;
+}
+
+
+.form__question {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #A0A0A0;
+    margin: 0;
+}
+
+.form__container-link {
+    display: flex;
+    justify-content: center;
+}
+
+.form__link {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #3456F3;
+    text-decoration: none;
+    margin-left: 5px;
+}
