@@ -2,7 +2,7 @@ import React from "react";
 
 function AboutMe() {
     return (
-        <section className="about-me">
+        <section className="about-me" id="section__about-me" data-section="a-m">
             <div className="about-me__block">
             <h2 className="about-me__title">Студент</h2>
             <h3 className="about-me__name">Анастасия</h3><h4 className="about-me__description">Фронтенд-разработчик, 27 лет</h4>

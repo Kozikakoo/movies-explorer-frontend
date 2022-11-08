@@ -44,6 +44,10 @@
     margin-bottom: 13px;
 }
 
+.movies-card__like:hover, .movies-card__nolike:hover {
+    cursor: pointer;
+}
+
 .movies-card__duration {
     font-family: 'Inter';
     font-style: normal;
