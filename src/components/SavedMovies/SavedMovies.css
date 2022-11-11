@@ -1,0 +1,18 @@
+.saved-movies {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    padding: 70px 70px 0;
+    column-gap: 1.7%;
+    row-gap: 38px;
+}
+
+@media screen and (max-width: 768px) {
+    .saved-movies {
+        padding: 78px 30px 0;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        column-gap: 3.5%;
+        row-gap: 15px;
+    }
+}

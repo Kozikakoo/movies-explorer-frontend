@@ -21,3 +21,18 @@
     width: 61%;
     margin-top: 13.5%;
 }
+
+@media screen and (max-width: 768px) {
+    .promo {
+        height: 834px;
+    }
+
+    .promo__text {
+        width: 80%;
+        margin-top: 350px;
+        display: flex;
+        font-size: 40px;
+        line-height: 52px;
+        letter-spacing: -0.04em;
+    }
+}

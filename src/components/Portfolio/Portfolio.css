@@ -54,3 +54,18 @@
     background-size: cover;
     align-self: center;
 }
+
+@media screen and (max-width: 768px) {
+    .portfolio {
+        padding: 0 50px 90px;
+    }
+    .portfolio__title {
+        margin-bottom: 32px;
+    }
+
+    .portfolio__img-link{
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+    }
+}

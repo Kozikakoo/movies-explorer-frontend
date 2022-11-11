@@ -16,7 +16,7 @@ function AboutProject() {
                     которые нужно было соблюдать, чтобы успешно защититься.</p>
             </div>
                     <table className="about-project__table">
-                        <tr><th className="about-project__weeks about-project__weeks_green">1 неделя</th><th className="about-project__weeks about-project__weeks_grey">2 неделя</th></tr>
+                        <tr><th className="about-project__weeks about-project__weeks_green">1 неделя</th><th className="about-project__weeks about-project__weeks_grey">4 недели</th></tr>
                         <tr><td className="about-project__part">Back-end</td><td className="about-project__part">Front-end</td></tr>
                     </table>
             </div>

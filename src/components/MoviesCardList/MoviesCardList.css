@@ -1,7 +1,46 @@
 .card-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding: 70px 70px 80px;
+    grid-template-rows: repeat(2, 1fr);
+    padding: 70px 70px 0;
     column-gap: 1.7%;
     row-gap: 38px;
+}
+
+.card-list__more {
+    width: 320px;
+    height: 36px;
+    border: 1px solid rgba(170, 170, 170, 0.2);
+    border-radius: 8px;
+    background: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #000000;
+    margin: 50px auto 80px;
+    transition: opacity 0.1s linear 0.1s;
+}
+
+.card-list__more:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+    .card-list {
+        padding: 78px 30px 0;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        column-gap: 3.5%;
+        row-gap: 15px;
+    }
+    .card-list__more {
+        margin: 50px auto 120px;
+    }
 }

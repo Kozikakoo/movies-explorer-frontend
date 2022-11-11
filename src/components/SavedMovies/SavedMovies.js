@@ -3,12 +3,12 @@ import Header from "../Header/Header";
 import {Link} from "react-router-dom";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import MoviesCard from "../MoviesCard/MoviesCard";
+import card1 from "../../images/33_words.jpg";
 
-function Movies(props) {
-
-
-    return (<>
+function SavedMovies(props) {
+    return (
+        <>
             <Header logoClassName="logo" children={<>
                 <div className="header__block-buttons">
                     <Link to="/movies">
@@ -18,17 +18,25 @@ function Movies(props) {
                         <button className="header__button-savedfilms">Сохраненные фильмы</button>
                     </Link>
                 </div>
-                <div className="header__menu" onClick={props.onClick}></div>
+                <div className="header__menu"></div>
                 <Link className="header__button-acc" to="/profile">
                     <div className="header__button-img"></div>
                     Аккаунт
                 </Link>
             </>}/>
             <SearchForm/>
-            <MoviesCardList movies={props.movies}/>
+            <div className="saved-movies">
+                {props.movies.slice(0, 3).map((movie) =>
+
+                    <MoviesCard movie={{
+                        title: movie.NameRu,
+                        image: movie.image,
+                        duration: movie.duration
+                    }}/>)}
+            </div>
             <Footer/>
         </>
     )
 }
 
-export default Movies;
+export default SavedMovies;

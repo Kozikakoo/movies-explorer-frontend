@@ -36,8 +36,16 @@
     line-height: 18px;
     text-align: center;
     border: none;
+    transition: opacity 0.1s linear 0.1s;
 }
 
 .search-form__button:hover {
     cursor: pointer;
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 1180px) {
+    .search-form__block {
+        padding: 70px 30px 0;
+    }
 }

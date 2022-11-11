@@ -1,8 +1,12 @@
 .about-me {
     padding: 110px 70px 100px;
+}
+
+.about-me__block {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 
 .about-me__title {
@@ -60,12 +64,47 @@
 }
 
 .about-me__photo {
+    position: absolute;
+    top: 65px;
+    right: 0;
     background-image: url("../../images/photome.jpg");
     width: 21%;
     height: 327px;
     background-position: center;
     background-size: cover;
     border-radius: 10px;
-    margin: 117px 0 0;
+    margin: 0;
     flex: 0 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .about-me {
+        padding: 90px 50px 90px;
+    }
+
+    .about-me__title {
+        height: 50px;
+    }
+
+    .about-me__name {
+        font-weight: 400;
+        font-size: 40px;
+        margin: 55px 0 8px;
+    }
+    .about-me__description {
+        font-size: 12px;
+        line-height: 18px;
+        margin: 0 0 18px;
+    }
+    .about-me__biography{
+        font-size: 12px;
+        line-height: 18px;
+        width: 55%;
+        margin: 0 0 87px;
+    }
+
+    .about-me__photo {
+        width: 38%;
+        height: 80%;
+    }
 }

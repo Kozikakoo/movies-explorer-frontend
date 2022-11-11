@@ -89,3 +89,22 @@
     height: 28px;
     width: 912px;
 }
+
+@media screen and (max-width: 768px) {
+    .about-project__title {
+        margin-top: 90px;
+        height: 50px;
+    }
+    .about-project__block {
+        margin-bottom: 76px;
+    }
+
+    .about-project__block {
+        grid-column-gap: 30px;
+        grid-row-gap: 90px;
+    }
+
+    .about-project__description {
+        margin: 70px 0 20px;
+    }
+}
