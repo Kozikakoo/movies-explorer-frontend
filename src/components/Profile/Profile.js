@@ -33,16 +33,6 @@ function Profile(props) {
                             <input className="profile__table-info" value={props.email} id="email"/>
                         </div>
                     </div>
-                    {/*<table >*/}
-                    {/*    <tr >*/}
-                    {/*        <td >Имя</td>*/}
-                    {/*        <td >{props.userName}</td>*/}
-                    {/*    </tr>*/}
-                    {/*    <tr className="profile__row">*/}
-                    {/*        <td ></td>*/}
-                    {/*        <td >{props.email}</td>*/}
-                    {/*    </tr>*/}
-                    {/*</table>*/}
                     <div className="profile__buttons">
                         <button className="profile__button-edit" onClick={props.onClickEditButton}>Редактировать
                         </button>

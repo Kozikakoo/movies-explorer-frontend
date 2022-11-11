@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import card1 from "../../images/33_words.jpg";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 function SavedMovies(props) {
     return (
@@ -27,8 +27,7 @@ function SavedMovies(props) {
             <SearchForm/>
             <div className="saved-movies">
                 {props.movies.slice(0, 3).map((movie) =>
-
-                    <MoviesCard movie={{
+                    <MoviesCard children={<DeleteButton/>} movie={{
                         title: movie.NameRu,
                         image: movie.image,
                         duration: movie.duration

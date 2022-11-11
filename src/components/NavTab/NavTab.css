@@ -19,6 +19,12 @@
     justify-content: center;
     align-items: center;
     margin-right: 10px;
+    transition: opacity 0.1s linear 0.1s;
+}
+
+.nav__item:hover {
+    opacity: 0.6;
+    cursor: pointer;
 }
 
 .nav__item:last-child {

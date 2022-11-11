@@ -1,0 +1,21 @@
+.nolike-button {
+    background-image: url("../../images/nolike.svg");
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    align-self: center;
+    margin-bottom: 13px;
+}
+
+.like-button {
+    background-image: url("../../images/like.svg");
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    align-self: center;
+    margin-bottom: 13px;
+}
+
+.like-button:hover, .nolike-button:hover {
+    cursor: pointer;
+}

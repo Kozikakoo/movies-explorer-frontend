@@ -10,7 +10,7 @@ function AboutMe() {
                 и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в
                 компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами
                 и ушёл с постоянной работы.</p>
-            <a className="about-me__link" href="#">Github</a><div className="about-me__photo"></div>
+            <a className="about-me__link" href="https://github.com/Kozikakoo" target="_blank">Github</a><div className="about-me__photo"></div>
             </div>
 
         </section>
