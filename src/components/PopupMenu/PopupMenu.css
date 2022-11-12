@@ -113,3 +113,20 @@
     margin: 0 7px 0 4px;
 }
 
+@media screen and (max-width: 320px) {
+    .popup-menu__content {
+        width: 100%;
+    }
+
+    .popup-menu__nav-list {
+        margin: 145px 0 0;
+    }
+
+    .popup-menu__nav-item {
+        margin-bottom: 25px;
+    }
+
+    .popup-menu__button-acc {
+        margin-bottom: 65px;
+    }
+}

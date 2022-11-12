@@ -63,9 +63,34 @@
         margin-bottom: 32px;
     }
 
-    .portfolio__img-link{
+    .portfolio__img-link {
         width: 15px;
         height: 15px;
         margin-right: 5px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .portfolio {
+        padding: 5px 14px 70px;
+    }
+
+    .portfolio__title {
+        margin-top: 5px;
+        margin-bottom: 22px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+   .portfolio__link {
+       font-size: 18px;
+       line-height: 28px;
+   }
+
+   .portfolio__item {
+       height: 68px;
+   }
+    .portfolio__img-link {
+        width: 10px;
+        height: 10px;
     }
 }

@@ -40,3 +40,14 @@
     line-height: 16px;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: 360px) {
+    .nav__link {
+        font-size: 10px;
+    }
+    .nav__item  {
+        margin-right: 6px;
+        width: 82px;
+        height: 26px;
+    }
+}

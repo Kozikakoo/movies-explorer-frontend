@@ -95,16 +95,59 @@
         margin-top: 90px;
         height: 50px;
     }
-    .about-project__block {
-        margin-bottom: 76px;
-    }
 
     .about-project__block {
+        margin-bottom: 76px;
         grid-column-gap: 30px;
         grid-row-gap: 90px;
     }
 
     .about-project__description {
         margin: 70px 0 20px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .about-project__title {
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 70px;
+        margin-bottom: 60px;
+    }
+
+    .about-project__block {
+        display: flex;
+        flex-direction: column;
+        grid-row-gap: 0;
+        margin: 0;
+    }
+
+    .about-project__description {
+        margin: 0 0 16px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .about-project__description-etc {
+        font-size: 11px;
+        line-height: 16px;
+        margin-bottom: 57px;
+    }
+
+    .about-project__weeks {
+        font-size: 11px;
+        line-height: 13px;
+    }
+
+    .about-project__part {
+        font-size: 11px;
+        line-height: 13px;
+        height: 20px;
+    }
+
+    .about-project__weeks_green {
+        height: 35px;
+        width: 370px;
+
     }
 }

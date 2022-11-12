@@ -42,8 +42,30 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 768px) {
     .not-found {
         padding: 408px 0 220px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .not-found {
+        padding: 329px 10px 30px;
+    }
+
+    .not-found__error {
+        font-size: 80px;
+        line-height: 97px;
+    }
+
+    .not-found__error-text {
+        font-size: 12px;
+        line-height: 15px;
+        margin: 10px 0 285px;
+    }
+
+    .not-found__link {
+        font-size: 12px;
+        line-height: 15px;
     }
 }

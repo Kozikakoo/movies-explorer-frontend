@@ -44,3 +44,16 @@
         margin: 50px auto 120px;
     }
 }
+
+@media screen and (max-width: 360px) {
+    .card-list {
+        display: flex;
+        flex-direction: column;
+        padding: 50px 10px 0;
+    }
+
+    .card-list__more {
+        width: 240px;
+        margin-top: 45px;
+    }
+}

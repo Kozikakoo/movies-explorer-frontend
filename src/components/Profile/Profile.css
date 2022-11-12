@@ -98,10 +98,30 @@
     .profile {
         padding: 220px 0 269px;
     }
+
     .profile__inputs {
         margin-top: 85px;
     }
+
     .profile__buttons {
         margin-top: 190px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .profile {
+        padding: 60px 0 40px;
+    }
+
+    .profile__row {
+        width: 260px;
+    }
+
+    .profile__inputs {
+        margin-top: 63px;
+    }
+
+    .profile__buttons {
+        margin-top: 360px;
     }
 }

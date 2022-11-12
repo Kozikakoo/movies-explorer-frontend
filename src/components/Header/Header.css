@@ -152,3 +152,37 @@
         margin-right: 30px;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .header {
+        height: 70px;
+    }
+
+    .logo {
+        margin-top: 4px;
+        margin-left: 14px;
+    }
+
+    .header__button-log, .header__button-reg {
+        font-size: 10px;
+    }
+
+    .header__button-log {
+        width: 54px;
+        height: 26px;
+        margin-right: 14px;
+        margin-left: 14px;
+    }
+
+    .header__menu {
+        width: 23px;
+        height: 31px;
+        background-position: center;
+        margin-right: 25px;
+    }
+
+    .logo-form {
+        margin-left: 110px;
+        margin-top: -20px;
+    }
+}

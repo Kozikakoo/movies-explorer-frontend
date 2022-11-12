@@ -16,3 +16,12 @@
         row-gap: 15px;
     }
 }
+
+@media screen and (max-width: 360px) {
+    .saved-movies {
+        display: flex;
+        flex-direction: column;
+        padding: 50px 10px 140px;
+        margin-bottom: 40px;
+    }
+}

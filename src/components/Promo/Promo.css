@@ -36,3 +36,19 @@
         letter-spacing: -0.04em;
     }
 }
+
+@media screen and (max-width: 360px) {
+
+    .promo {
+        width: 91%;
+        height: 586px;
+    }
+
+    .promo__text {
+        margin-top: 215px;
+        font-size: 29px;
+        line-height: 37px;
+        width: 97%;
+    }
+
+}

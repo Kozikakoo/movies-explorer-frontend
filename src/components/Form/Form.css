@@ -154,3 +154,55 @@
         flex-direction: column;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .form__container {
+        padding: 56px 30px 30px;
+    }
+
+    .form__title {
+        align-self: center;
+        margin-bottom: 64px;
+    }
+
+    .form__label {
+        margin-top: 12px;
+        margin-left: 2px;
+    }
+
+    .form__input {
+        margin: 0 30px;
+        padding: 0 15px;
+        width: 240px;
+    }
+
+    .form__submit-log, .form__submit-reg {
+        height: 45px;
+        width: 260px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .form__submit-log {
+        margin: 254px 0 14px;
+    }
+
+    .form__link {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .form__question {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .form__container-link {
+        flex-direction: row;
+    }
+
+    .form__submit-reg {
+        margin: 170px 0 14px;
+    }
+
+}
