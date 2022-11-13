@@ -13,7 +13,7 @@ export const validateName = () => {
     if (name === "") {
         printError("nameErr", "Пожалуйста, введите ваше имя");
     } else {
-        let regex = /^[a-zA-Z\s]+$/;
+        let regex = /^[а-яА-ЯёЁa-zA-Z\s]+$/;
         if (regex.test(name) === false) {
             printError("nameErr", "Пожалуйста, введите правильное имя");
             document.getElementById("name").classList.add("form__input-error");
