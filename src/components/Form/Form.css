@@ -157,7 +157,7 @@
 
 @media screen and (max-width: 430px) {
     .form__container {
-        padding: 56px 30px 30px;
+        padding: 56px 45px 30px;
     }
 
     .form__title {
@@ -167,13 +167,12 @@
 
     .form__label {
         margin-top: 12px;
-        margin-left: 2px;
     }
 
     .form__input {
-        margin: 0 30px;
+        margin: 0;
+        width: 100%;
         padding: 0 15px;
-        width: 240px;
     }
 
     .form__submit-log, .form__submit-reg {
@@ -199,6 +198,8 @@
 
     .form__container-link {
         flex-direction: row;
+        width: 260px;
+        justify-content: center;
     }
 
     .form__submit-reg {

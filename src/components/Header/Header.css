@@ -153,7 +153,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 340px) {
     .header {
         height: 70px;
     }
@@ -182,7 +182,6 @@
     }
 
     .logo-form {
-        margin-left: 110px;
-        margin-top: -20px;
+        margin: -20px 90px 0;
     }
 }
