@@ -24,15 +24,17 @@ function SavedMovies(props) {
                     Аккаунт
                 </Link>
             </>}/>
-            <SearchForm/>
-            <div className="saved-movies">
-                {props.movies.slice(0, 3).map((movie) =>
-                    <MoviesCard children={<DeleteButton/>} movie={{
-                        title: movie.NameRu,
-                        image: movie.image,
-                        duration: movie.duration
-                    }}/>)}
-            </div>
+            <main>
+                <SearchForm/>
+                <div className="saved-movies">
+                    {props.movies.slice(0, 3).map((movie) =>
+                        <MoviesCard children={<DeleteButton/>} movie={{
+                            title: movie.NameRu,
+                            image: movie.image,
+                            duration: movie.duration
+                        }}/>)}
+                </div>
+            </main>
             <Footer/>
         </>
     )

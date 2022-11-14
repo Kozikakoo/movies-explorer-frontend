@@ -5,15 +5,29 @@ import AboutProject from "../AboutProject/AboutProject";
 import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
+import Header from "../Header/Header";
+import {Link} from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 function Main() {
     return (
         <>
-            <Promo children={<NavTab/>}/>
-            <AboutProject/>
-            <Techs/>
-            <AboutMe/>
-            <Portfolio/>
+            <Header logoClassName="logo" children={<div className="header__buttons">
+                <Link to="/signup">
+                    <button className="header__button-reg">Регистрация</button>
+                </Link>
+                <Link to="/signin">
+                    <button className="header__button-log">Войти</button>
+                </Link>
+            </div>}/>
+            <main>
+                <Promo children={<NavTab/>}/>
+                <AboutProject/>
+                <Techs/>
+                <AboutMe/>
+                <Portfolio/>
+            </main>
+            <Footer/>
         </>
     )
 }

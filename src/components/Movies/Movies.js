@@ -24,8 +24,10 @@ function Movies(props) {
                     Аккаунт
                 </Link>
             </>}/>
-            <SearchForm/>
-            <MoviesCardList movies={props.movies}/>
+            <main>
+                <SearchForm/>
+                <MoviesCardList movies={props.movies}/>
+            </main>
             <Footer/>
         </>
     )
