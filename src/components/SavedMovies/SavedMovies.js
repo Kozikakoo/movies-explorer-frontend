@@ -26,14 +26,14 @@ function SavedMovies(props) {
             </>}/>
             <main>
                 <SearchForm/>
-                <div className="saved-movies">
+                <ul className="saved-movies">
                     {props.movies.slice(0, 3).map((movie) =>
                         <MoviesCard children={<DeleteButton/>} movie={{
                             title: movie.NameRu,
                             image: movie.image,
                             duration: movie.duration
                         }}/>)}
-                </div>
+                </ul>
             </main>
             <Footer/>
         </>

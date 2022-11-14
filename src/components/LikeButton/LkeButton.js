@@ -14,8 +14,8 @@ function LikeButton() {
     }
 
     return (
-        <div className={like ? cardLikeButtonClassName : cardNoLikeButtonClassName}
-                 onClick={handleButtonLikeClick}></div>
+        <button className={like ? cardLikeButtonClassName : cardNoLikeButtonClassName}
+                 onClick={handleButtonLikeClick} type="button"></button>
     )
 }
 

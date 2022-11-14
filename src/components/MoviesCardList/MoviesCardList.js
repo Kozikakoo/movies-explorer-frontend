@@ -6,7 +6,7 @@ import LikeButton from "../LikeButton/LkeButton";
 function MoviesCardList(props) {
         return (
         <>
-            <div className="card-list">
+            <ul className="card-list">
                 {props.movies.slice(0, 16).map((movie) =>
 
                     <MoviesCard children={<LikeButton/>}
@@ -17,7 +17,7 @@ function MoviesCardList(props) {
 
                     }} />)}
 
-            </div>
+            </ul>
             <button className="card-list__more">Ещё</button>
         </>
     )

@@ -6,6 +6,8 @@
     align-self: center;
     margin-bottom: 13px;
     opacity: 0;
+    border: none;
+    background-color: white;
 }
 
 .delete-button:hover {

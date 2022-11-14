@@ -5,6 +5,7 @@
     padding: 70px 70px 0;
     column-gap: 1.7%;
     row-gap: 38px;
+    margin: 0;
 }
 
 .card-list__more {
