@@ -160,11 +160,6 @@
         padding: 56px 45px 30px;
     }
 
-    .form__title {
-        align-self: center;
-        margin-bottom: 64px;
-    }
-
     .form__label {
         margin-top: 12px;
     }
@@ -207,3 +202,11 @@
     }
 
 }
+
+@media screen and (max-width: 340px) {
+    .form__title {
+        align-self: center;
+        margin-bottom: 64px;
+    }
+}
+
