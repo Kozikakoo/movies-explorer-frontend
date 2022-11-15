@@ -1,5 +1,6 @@
 .movies-card {
     list-style-type: none;
+    width: 100%;
 }
 
 .movies-card__image {
