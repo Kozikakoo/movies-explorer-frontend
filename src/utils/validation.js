@@ -6,6 +6,26 @@ export const printError = (elemId, hintMsg) => {
 
 }
 
+export const validateSearchInput = () => {
+    let search = document.getElementById("search").value;
+    let searchErr = true
+
+    if (search === "") {
+        printError("searchErr", "Пожалуйста, введите ключевую фразу или слово");
+    } else {
+        let regex = /^[а-яА-ЯёЁa-zA-Z -]+$/;
+        if (regex.test(search) === false) {
+            printError("searchErr", "Пожалуйста, введите ключевую фразу или слово");
+            document.getElementById("search").classList.add("form__input-error");
+        } else {
+            printError("searchErr", "");
+            document.getElementById("search").classList.remove("form__input-error")
+            searchErr = false;
+        }
+    }
+    return searchErr !== true;
+}
+
 export const validateName = () => {
     let name = document.getElementById("name").value;
     let nameErr = true
@@ -13,7 +33,7 @@ export const validateName = () => {
     if (name === "") {
         printError("nameErr", "Пожалуйста, введите ваше имя");
     } else {
-        let regex = /^[а-яА-ЯёЁa-zA-Z\s]+$/;
+        let regex = /^[а-яА-ЯёЁa-zA-Z -]+$/;
         if (regex.test(name) === false) {
             printError("nameErr", "Пожалуйста, введите правильное имя");
             document.getElementById("name").classList.add("form__input-error");

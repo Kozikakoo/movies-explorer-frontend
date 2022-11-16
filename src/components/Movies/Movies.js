@@ -25,8 +25,8 @@ function Movies(props) {
                 </Link>
             </>}/>
             <main>
-                <SearchForm/>
-                <MoviesCardList movies={props.movies}/>
+                <SearchForm onSubmitSearchFilm={props.onSubmitSearch} onChangeSearchInput={props.onChangeSearchInput}/>
+                <MoviesCardList movies={props.movies} isLoading={props.isLoading}/>
             </main>
             <Footer/>
         </>

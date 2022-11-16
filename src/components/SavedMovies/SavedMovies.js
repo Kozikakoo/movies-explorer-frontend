@@ -25,7 +25,7 @@ function SavedMovies(props) {
                 </Link>
             </>}/>
             <main>
-                <SearchForm/>
+                <SearchForm onSubmitSearchFilm={props.onSubmitSearchFilm}/>
                 <ul className="saved-movies">
                     {props.movies.slice(0, 3).map((movie) =>
                         <MoviesCard children={<DeleteButton/>} movie={{

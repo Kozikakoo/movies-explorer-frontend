@@ -4,9 +4,12 @@ function MoviesCard(props) {
 
     return (
         <li className="movies-card">
-            <div className="movies-card__image" style={{backgroundImage: `url(${props.movie.image})`}}></div>
+            <a href={props.movie.trailerLink}>
+            <div className="movies-card__image"
+                 style={{backgroundImage: `url( https://api.nomoreparties.co/${props.movie.image.url})`}}></div>
+        </a>
             <div className="movies-card__block">
-                <h2 className="movies-card__title">{props.movie.title}</h2>
+                <h2 className="movies-card__title">{props.movie.nameRU}</h2>
                 {props.children}
             </div>
             <p className="movies-card__duration">{props.movie.duration}</p>
