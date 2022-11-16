@@ -1,0 +1,132 @@
+.popup-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: end;
+    z-index: 2;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.popup-menu__open {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-menu__content {
+    width: 67.8%;
+    background: #FFFFFF;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.popup-menu__close {
+    position: absolute;
+    background-image: url("../../images/close.svg");
+    background-color: white;
+    width: 22px;
+    height: 22px;
+    background-position: center;
+    border: none;
+    top: 22px;
+    right: 22px;
+    transition: opacity 0.1s linear 0.1s;
+}
+
+.popup-menu__close:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.popup-menu__nav {
+
+}
+
+.popup-menu__nav-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    margin: 159px 0 0;
+}
+
+.popup-menu__nav-item {
+    margin-bottom: 28px;
+}
+
+.popup-menu__nav-link {
+    text-decoration: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+}
+
+.popup-menu__nav-link:hover {
+    cursor: pointer;
+    border-bottom: 2px black solid;
+}
+
+.popup-menu__button-acc {
+    align-self: center;
+    margin-bottom: 90px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    background: none;
+    width: 100px;
+    height: 32px;
+    border-radius: 50px;
+    border: 1px solid #AAAAAA;
+    text-decoration: none;
+    transition: opacity 0.1s linear 0.1s;
+}
+
+.popup-menu__button-acc:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.popup-menu__button-img {
+    background-image: url("../../images/icon__buttonacc.svg");
+    width: 12px;
+    height: 14px;
+    margin: 0 7px 0 4px;
+}
+
+@media screen and (max-width: 320px) {
+    .popup-menu__content {
+        width: 100%;
+    }
+
+    .popup-menu__nav-list {
+        margin: 145px 0 0;
+    }
+
+    .popup-menu__nav-item {
+        margin-bottom: 25px;
+    }
+
+    .popup-menu__button-acc {
+        margin-bottom: 65px;
+    }
+}
