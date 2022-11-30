@@ -52,15 +52,18 @@ export const validateEmail = () => {
 
     if (email === "") {
         printError("emailErr", "Пожалуйста, введите адрес вашей электронной почты");
+        document.querySelector(".form__submit-log").setAttribute("disabled", "disabled")
     } else {
         // Регулярное выражение для базовой проверки электронной почты
         let regex = /^\S+@\S+\.\S+$/;
         if (regex.test(email) === false) {
             printError("emailErr", "Пожалуйста, введите действительный адрес электронной почты");
             document.getElementById("email").classList.add("form__input-error");
+            document.querySelector(".form__submit-log").setAttribute("disabled", "disabled")
         } else {
             printError("emailErr", "");
             document.getElementById("email").classList.remove("form__input-error");
+            document.querySelector(".form__submit-log").removeAttribute("disabled")
             emailErr = false;
         }
     }
@@ -73,15 +76,18 @@ export const validatePassword = () => {
 
     if (password === "") {
         printError("passwordErr", "Пожалуйста, введите пароль");
+        document.querySelector(".form__submit-log").setAttribute("disabled", "disabled")
     } else {
         // Регулярное выражение для базовой проверки электронной почты
         let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
         if (regex.test(password) === false) {
             printError("passwordErr", "Некорректный пароль, укажите хотя бы одну заглавную и прописную латинскую букву");
             document.getElementById("password").classList.add("form__input-error");
+            document.querySelector(".form__submit-log").setAttribute("disabled", "disabled")
         } else {
             printError("passwordErr", "");
             document.getElementById("password").classList.remove("form__input-error");
+            document.querySelector(".form__submit-log").removeAttribute("disabled")
             passwordErr = false;
         }
     }

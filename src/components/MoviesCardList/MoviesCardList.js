@@ -5,17 +5,30 @@ import Preloader from "../Preloader/Preloader";
 
 
 function MoviesCardList(props) {
+
         return (
-        <>{props.isLoading ? <Preloader/> : <ul className="card-list"> {props.movies.map((movie) =>
+        <>{props.isLoading ? <Preloader/> : <ul className="card-list"> {
 
-                    <MoviesCard children={<LikeButton/>}
-                                movie={{
-                                    trailerLink: movie.trailerLink,
-                                    nameRU: movie.nameRU,
-                                    image: movie.image,
-                                    duration: movie.duration,
+            props.movies.map((movie) =>
 
-                                }}/>)}
+            <MoviesCard moviesRoute={props.moviesRoute}
+            movie={{
+            trailerLink: movie.trailerLink,
+            nameRU: movie.nameRU,
+            image: movie.image,
+            duration: movie.duration,
+            country: movie.country,
+            director: movie.director,
+            year: movie.year,
+            description: movie.description,
+            nameEN: movie.nameEN,
+            thumbnail: movie.image.formats.thumbnail.url,
+            movieId: movie.id
+        }}/>)
+
+
+
+        }
 
             </ul>
         }

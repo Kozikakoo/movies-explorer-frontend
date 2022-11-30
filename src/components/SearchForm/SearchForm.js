@@ -19,7 +19,7 @@ function SearchForm(props) {
                 <input className="search-form__input" type="search" id="search" placeholder="Фильм" required ref={inputSearchFilmRef} onChange={props.onChangeSearchInput}/>
                 <button className="search-form__button" type="submit">Поиск</button>
                 <div className="search-error" id="searchErr"></div>
-                <FilterCheckbox/>
+                <FilterCheckbox onClickCheckbox={props.onClickCheckbox}/>
             </form>
         </div>
     )

@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 import {Link} from 'react-router-dom';
+import PopupMenu from "../PopupMenu/PopupMenu";
 
 function Profile(props) {
 
@@ -15,6 +16,7 @@ function Profile(props) {
                         <button className="header__button-savedfilms">Сохраненные фильмы</button>
                     </Link>
                 </div>
+                <div className="header__menu" onClick={props.onClick}></div>
                 <Link className="header__button-acc" to="/profile">
                     <div className="header__button-img"></div>
                     Аккаунт
@@ -42,6 +44,7 @@ function Profile(props) {
                     </div>
                 </form>
             </div>
+            <PopupMenu isOpen={props.isOpen} onClickClosedPopup={props.onClickClosedPopup}/>
         </>
     )
 }

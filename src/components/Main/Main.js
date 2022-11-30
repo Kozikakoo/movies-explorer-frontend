@@ -8,18 +8,12 @@ import Portfolio from "../Portfolio/Portfolio";
 import Header from "../Header/Header";
 import {Link} from "react-router-dom";
 import Footer from "../Footer/Footer";
+import PopupMenu from "../PopupMenu/PopupMenu";
 
-function Main() {
+function Main(props) {
     return (
         <>
-            <Header logoClassName="logo" children={<div className="header__buttons">
-                <Link to="/signup">
-                    <button className="header__button-reg">Регистрация</button>
-                </Link>
-                <Link to="/signin">
-                    <button className="header__button-log">Войти</button>
-                </Link>
-            </div>}/>
+            {props.children}
             <main>
                 <Promo children={<NavTab/>}/>
                 <AboutProject/>
@@ -28,6 +22,7 @@ function Main() {
                 <Portfolio/>
             </main>
             <Footer/>
+            <PopupMenu isOpen={props.isOpen} onClickClosedPopup={props.onClickClosedPopup}/>
         </>
     )
 }

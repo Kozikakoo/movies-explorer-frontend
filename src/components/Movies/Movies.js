@@ -4,9 +4,20 @@ import {Link} from "react-router-dom";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import PopupMenu from "../PopupMenu/PopupMenu";
 
 function Movies(props) {
+    const [moviesRoute, setMoviesRoute] = React.useState(false)
 
+    React.useEffect(() => {
+        setMoviesRoute(true)
+    }, [])
+
+
+    React.useEffect(() => {
+        let savedFilms = localStorage.getItem("foundFilms")
+        props.setMoviesCards(savedFilms)
+    }, [])
 
     return (<>
             <Header logoClassName="logo" children={<>
@@ -25,11 +36,15 @@ function Movies(props) {
                 </Link>
             </>}/>
             <main>
-                <SearchForm onSubmitSearchFilm={props.onSubmitSearch} onChangeSearchInput={props.onChangeSearchInput}/>
-                <MoviesCardList movies={props.movies} isLoading={props.isLoading}/>
+                <SearchForm onSubmitSearchFilm={props.onSubmitSearch} onChangeSearchInput={props.onChangeSearchInput}
+                            onClickCheckbox={props.onClickCheckbox}/>
+                <MoviesCardList movies={props.movies} isLoading={props.isLoading} like={props.like}
+                                moviesRoute={moviesRoute}/>
             </main>
             <Footer/>
+        <PopupMenu isOpen={props.isOpen} onClickClosedPopup={props.onClickClosedPopup}/>
         </>
+
     )
 }
 

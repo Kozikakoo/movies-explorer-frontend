@@ -34,8 +34,19 @@ class MainApi {
             .then(this._checkResponse)
     }
 
-    addMovies({...data}) {
-        return fetch(`${this._baseUrl}/cards`, {
+    addMovies(
+                  country,
+                  director,
+                  duration,
+                  year,
+                  description,
+                  image,
+                  trailerLink,
+                  nameRU,
+                  nameEN,
+                  thumbnail,
+                  movieId) {
+        return fetch(`${this._baseUrl}/movies`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -45,7 +56,7 @@ class MainApi {
                 year,
                 description,
                 image,
-                trailer,
+                trailerLink,
                 nameRU,
                 nameEN,
                 thumbnail,

@@ -5,8 +5,13 @@ import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import DeleteButton from "../DeleteButton/DeleteButton";
+import Preloader from "../Preloader/Preloader";
+import PopupMenu from "../PopupMenu/PopupMenu";
+
 
 function SavedMovies(props) {
+
+
     return (
         <>
             <Header logoClassName="logo" children={<>
@@ -18,7 +23,7 @@ function SavedMovies(props) {
                         <button className="header__button-savedfilms">Сохраненные фильмы</button>
                     </Link>
                 </div>
-                <div className="header__menu"></div>
+                <div className="header__menu" onClick={props.onClick}></div>
                 <Link className="header__button-acc" to="/profile">
                     <div className="header__button-img"></div>
                     Аккаунт
@@ -26,16 +31,19 @@ function SavedMovies(props) {
             </>}/>
             <main>
                 <SearchForm onSubmitSearchFilm={props.onSubmitSearchFilm}/>
+                {props.isLoading ? <Preloader/> :
                 <ul className="saved-movies">
-                    {props.movies.slice(0, 3).map((movie) =>
+                    {props.savedMovies.slice(0, 10).map((movie) =>
                         <MoviesCard children={<DeleteButton/>} movie={{
-                            title: movie.NameRu,
+                            nameRU: movie.nameRU,
                             image: movie.image,
-                            duration: movie.duration
+                            duration: movie.duration,
+                            _id: movie._id
                         }}/>)}
-                </ul>
+                </ul>}
             </main>
             <Footer/>
+            <PopupMenu isOpen={props.isOpen} onClickClosedPopup={props.onClickClosedPopup}/>
         </>
     )
 }
