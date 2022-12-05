@@ -42,12 +42,11 @@ function App() {
     }
 
     const handleCheckbox = () => {
-        if(checkboxInput.checked === true) {
+        if (checkboxInput.checked === true) {
             setIsCheckShortMovie(true)
             console.log(true)
 
-        }
-        else setIsCheckShortMovie(false)
+        } else setIsCheckShortMovie(false)
     }
 
     const handleLogin = ({password, email}) => {
@@ -101,6 +100,20 @@ function App() {
         event.preventDefault()
     }
 
+    const handleLogout = () => {
+        setLoggedIn(false)
+        localStorage.removeItem("token")
+        history.push("/")
+    }
+
+    const handleUpdateUser = (currentUser) => {
+        mainApi.editProfile(currentUser.email, currentUser.name )
+            .then((res) => {
+                setCurrentUser(res);
+            })
+            .catch(console.log)
+    }
+
     let foundShortFilms = []
 
     const handleSearchFilm = (valueSearchInput) => {
@@ -111,31 +124,30 @@ function App() {
                     let newRegex = searchFilms(valueSearchInput)
                     for (let i = 0; i < res.length; i++) {
                         const stringRes = JSON.stringify(res[i])
-                        if (newRegex.test(stringRes) && isCheckShortMovie === true ) {
-                            if(res[i].duration<41)
-                            foundFilms.push(res[i])
-                        }
-                        else if (newRegex.test(stringRes) && isCheckShortMovie === false) {
+                        if (newRegex.test(stringRes) && isCheckShortMovie === true) {
+                            if (res[i].duration < 41)
+                                foundFilms.push(res[i])
+                        } else if (newRegex.test(stringRes) && isCheckShortMovie === false) {
                             foundFilms.push(res[i])
                         }
                     }
                     setMoviesCards(foundFilms)
-                console.log(foundFilms)
+                    console.log(foundFilms)
                     localStorage.setItem("foundFilms", JSON.stringify(foundFilms))
-                // if(window.innerWidth>768) {
-                //
-                //     for (let k=0; k < 8; k++) {
-                //         newMoviesCards.push(res[k])
-                //     }
-                //
-                // }
-                // if(window.innerWidth>320)     {
-                //     for (let i=0; i < 4; i++) {
-                //         newMoviesCards.push(moviesCards[i])
-                //     }}
-                // for (let i=0; i < 2; i++) {
-                //     newMoviesCards.push(moviesCards[i])
-                // }
+                    // if(window.innerWidth>768) {
+                    //
+                    //     for (let k=0; k < 8; k++) {
+                    //         newMoviesCards.push(res[k])
+                    //     }
+                    //
+                    // }
+                    // if(window.innerWidth>320)     {
+                    //     for (let i=0; i < 4; i++) {
+                    //         newMoviesCards.push(moviesCards[i])
+                    //     }}
+                    // for (let i=0; i < 2; i++) {
+                    //     newMoviesCards.push(moviesCards[i])
+                    // }
 
 
                 }
@@ -159,13 +171,20 @@ function App() {
     React.useEffect(() => {
         setIsLoading(true);
         mainApi.getSavedMovies()
-            .then((res)=>
+            .then((res) =>
                 setSavedMovies(res)
             )
             .catch(console.log)
             .finally(() => {
                 setIsLoading(false);
             })
+    }, [])
+
+    React.useEffect(() => {
+        mainApi.getProfile()
+            .then((userData) =>
+                setCurrentUser(userData))
+            .catch(console.log)
     }, [])
 
     const tokenCheck = () => {
@@ -193,36 +212,41 @@ function App() {
                 <div classname="page">
                     <Switch>
                         <Route exact path="/">
-                            <Main isOpen={isOpen && ("popup-menu__open")} onClickClosedPopup={handleCloseMenuPopupClick} children={loggedIn ?  <Header logoClassName="logo" children={<>
-                                <div className="header__block-buttons">
-                                    <Link to="/movies">
-                                        <button className="header__button-films">Фильмы</button>
-                                    </Link>
-                                    <Link to="/saved-movies">
-                                        <button className="header__button-savedfilms">Сохраненные фильмы</button>
-                                    </Link>
-                                </div>
-                                <div className="header__menu" onClick={handleOpenMenuPopupClick}></div>
-                                <Link className="header__button-acc" to="/profile">
-                                    <div className="header__button-img"></div>
-                                    Аккаунт
-                                </Link>
-                            </>}/> : <Header logoClassName="logo" children={<div className="header__buttons">
-                                <Link to="/signup">
-                                    <button className="header__button-reg">Регистрация</button>
-                                </Link>
-                                <Link to="/signin">
-                                    <button className="header__button-log">Войти</button>
-                                </Link>
-                            </div>}/>}/>
+                            <Main isOpen={isOpen && ("popup-menu__open")} onClickClosedPopup={handleCloseMenuPopupClick}
+                                  children={loggedIn ? <Header logoClassName="logo" children={<>
+                                      <div className="header__block-buttons">
+                                          <Link to="/movies">
+                                              <button className="header__button-films">Фильмы</button>
+                                          </Link>
+                                          <Link to="/saved-movies">
+                                              <button className="header__button-savedfilms">Сохраненные фильмы</button>
+                                          </Link>
+                                      </div>
+                                      <div className="header__menu" onClick={handleOpenMenuPopupClick}></div>
+                                      <Link className="header__button-acc" to="/profile">
+                                          <div className="header__button-img"></div>
+                                          Аккаунт
+                                      </Link>
+                                  </>}/> : <Header logoClassName="logo" children={<div className="header__buttons">
+                                      <Link to="/signup">
+                                          <button className="header__button-reg">Регистрация</button>
+                                      </Link>
+                                      <Link to="/signin">
+                                          <button className="header__button-log">Войти</button>
+                                      </Link>
+                                  </div>}/>}/>
                         </Route>
                         <ProtectedRoute path="/movies"
                                         component={Movies}
                                         loggedIn={loggedIn}
-                                        movies={moviesCards} setMoviesCards={(savedFilms)=>setMoviesCards(JSON.parse(savedFilms))} onClick={handleOpenMenuPopupClick}
+                                        movies={moviesCards}
+                                        setMoviesCards={(savedFilms) => setMoviesCards(JSON.parse(savedFilms))}
+                                        onClick={handleOpenMenuPopupClick}
                                         onSubmitSearch={handleSearchFilm} isLoading={isLoading}
-                                        onChangeSearchInput={validateSearchInput} like={handleSaveMovie} onClickCheckbox={handleCheckbox}
-                                        isOpen={isOpen && ("popup-menu__open")} onClickClosedPopup={handleCloseMenuPopupClick}
+                                        onChangeSearchInput={validateSearchInput} like={handleSaveMovie}
+                                        onClickCheckbox={handleCheckbox}
+                                        isOpen={isOpen && ("popup-menu__open")}
+                                        onClickClosedPopup={handleCloseMenuPopupClick}
                         />
                         <Route path="/signup">
                             <Register onRegister={handleRegister}/>
@@ -233,18 +257,24 @@ function App() {
                         <ProtectedRoute path="/profile"
                                         component={Profile}
                                         loggedIn={loggedIn}
+                                        onUpdateUser={handleUpdateUser}
+                                        onClickLogout={handleLogout}
                                         onClick={handleOpenMenuPopupClick}
-                                        userName="Виталий" email="pochta@yandex.ru" onClickEditButton={handleEditUserClick}
+                                        userName={currentUser.name} email={currentUser.email}
+                                        onClickEditButton={handleEditUserClick}
                                         isEdit={isEditUser}
-                                        isOpen={isOpen && ("popup-menu__open")} onClickClosedPopup={handleCloseMenuPopupClick}
+                                        isOpen={isOpen && ("popup-menu__open")}
+                                        onClickClosedPopup={handleCloseMenuPopupClick}
                         />
                         <ProtectedRoute path="/saved-movies"
                                         component={SavedMovies}
                                         loggedIn={loggedIn}
-                                        movies={moviesCards} savedMovies={savedMovies} onClick={handleOpenMenuPopupClick}
+                                        movies={moviesCards} savedMovies={savedMovies}
+                                        onClick={handleOpenMenuPopupClick}
                                         onSubmitSearch={handleSearchFilm} isLoading={isLoading}
                                         onChangeSearchInput={validateSearchInput} onClickCheckbox={handleCheckbox}
-                                        isOpen={isOpen && ("popup-menu__open")} onClickClosedPopup={handleCloseMenuPopupClick}
+                                        isOpen={isOpen && ("popup-menu__open")}
+                                        onClickClosedPopup={handleCloseMenuPopupClick}
                         />
                         <Route path='*'>
                             <NotFound/>
