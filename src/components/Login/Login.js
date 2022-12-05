@@ -16,6 +16,17 @@ function Login(props) {
         });
     }
 
+    const handleChangePassword = (e) => {
+        handleChange(e)
+        validatePassword()
+    }
+
+    const handleChangeEmail = (e) => {
+        handleChange(e)
+        validateEmail()
+    }
+
+
 
     const handleSubmitLogin = () => {
         const {password, email} = data;
@@ -28,7 +39,7 @@ function Login(props) {
 
 return (
         <Form title="Рады видеть!" email={data.email} password={data.password} submitButton="Войти" question="Ещё не зарегистрированы?" linkText="Регистрация"
-              link="/signup" submitClassName="form__submit-log" onChangeEmail={handleChange} onChangePassword={handleChange}
+              link="/signup" submitClassName="form__submit-log" onChangeEmail={handleChangeEmail} onChangePassword={handleChangePassword}
         onSubmit={handleSubmitLogin}/>)}
 
 

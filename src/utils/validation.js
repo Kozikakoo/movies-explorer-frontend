@@ -78,10 +78,9 @@ export const validatePassword = () => {
         printError("passwordErr", "Пожалуйста, введите пароль");
         document.querySelector(".form__submit-log").setAttribute("disabled", "disabled")
     } else {
-        // Регулярное выражение для базовой проверки электронной почты
-        let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
+        let regex = /^(?=.*\d)(?=.*[A-Za-z])(?!.*\s).*$/;
         if (regex.test(password) === false) {
-            printError("passwordErr", "Некорректный пароль, укажите хотя бы одну заглавную и прописную латинскую букву");
+            printError("passwordErr", "Некорректный пароль, укажите хотя бы одну заглавную или прописную латинскую букву");
             document.getElementById("password").classList.add("form__input-error");
             document.querySelector(".form__submit-log").setAttribute("disabled", "disabled")
         } else {

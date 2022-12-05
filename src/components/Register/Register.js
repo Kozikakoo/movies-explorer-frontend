@@ -10,16 +10,6 @@ function Register(props) {
 
     });
 
-    const handleChangeName = (e) => {
-        const {name, value} = e.target;
-        setData({
-            ...data,
-            [name]: value
-        });
-        validateName()
-    }
-
-
     const handleChange = (e) => {
         const {name, value} = e.target;
         setData({
@@ -27,6 +17,22 @@ function Register(props) {
             [name]: value
         });
     }
+
+    const handleChangeName = (e) => {
+        handleChange(e)
+        validateName()
+    }
+
+    const handleChangePassword = (e) => {
+        handleChange(e)
+        validatePassword()
+    }
+
+    const handleChangeEmail = (e) => {
+        handleChange(e)
+        validateEmail()
+    }
+
 
     const handleSubmitRegister = () => {
         console.log("yes")
@@ -43,8 +49,8 @@ function Register(props) {
         </>} title="Добро пожаловать!"
               submitButton="Зарегистрироваться" question="Уже зарегистрированы?" linkText="Войти" link="/signin"
               submitClassName="form__submit-reg"
-              onChangePassword={handleChange}
-              onChangeEmail={handleChange} onSubmit={handleSubmitRegister}/>
+              onChangePassword={handleChangePassword}
+              onChangeEmail={handleChangeEmail} onSubmit={handleSubmitRegister}/>
     )
 }
 
