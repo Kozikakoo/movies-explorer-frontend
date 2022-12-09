@@ -48,6 +48,7 @@
     align-items: center;
     height: 46px;
     border-bottom: 1px solid #E8E8E8;
+    position: relative;
 }
 
 .profile__row:last-of-type {
@@ -75,6 +76,14 @@
     transition: opacity 0.1s linear 0.1s;
 }
 
+.profile__button-edit:disabled {
+    opacity: 0.6;
+}
+
+.profile__button-edit:disabled:hover {
+    cursor: default;
+}
+
 .profile__button-logout {
     margin-top: 16px;
     font-family: 'Inter';
@@ -92,6 +101,18 @@
 .profile__button-edit:hover, .profile__button-logout:hover {
     cursor: pointer;
     opacity: 0.6;
+}
+
+.profile__error {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FF3055;
+    right: 0;
+    top: 33px;
+    position: absolute;
 }
 
 @media screen and (max-width: 768px) {

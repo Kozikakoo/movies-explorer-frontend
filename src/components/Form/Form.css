@@ -65,6 +65,14 @@
 
 }
 
+.form__submit-reg:disabled, .form__submit-log:disabled {
+    opacity: 0.6;
+}
+
+.form__submit-reg:disabled:hover, .form__submit-log:disabled:hover {
+    cursor: default;
+}
+
 .form__submit-reg {
     margin: 90px 0 30px;
 }

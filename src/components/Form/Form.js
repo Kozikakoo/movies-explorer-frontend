@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 
 function Form(props) {
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         props.onSubmit()
@@ -23,7 +24,7 @@ function Form(props) {
                 <input className="form__input" type="password" name="password" id="password" value={props.password || ""} required
                        onChange={props.onChangePassword}/>
                 <div className="error" id="passwordErr"></div>
-                <button className={props.submitClassName} type="submit">{props.submitButton}</button>
+                <button className={props.submitClassName} type="submit" disabled={props.isDisabled}>{props.submitButton}</button>
                 <div className="form__container-link">
                     <p className="form__question">{props.question}</p>
                     <Link to={props.link} className="form__link">{props.linkText}</Link>

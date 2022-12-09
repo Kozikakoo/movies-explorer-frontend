@@ -3,11 +3,13 @@ import Header from "../Header/Header";
 import {Link} from 'react-router-dom';
 import PopupMenu from "../PopupMenu/PopupMenu";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import {validateEmail, validateName} from "../../utils/validation";
 
 function Profile(props) {
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('')
+    const [isDisabled, setIsDisabled] = React.useState(true)
 
     React.useEffect(() => {
         setName(currentUser.name);
@@ -15,11 +17,23 @@ function Profile(props) {
     }, [currentUser]);
 
     const handleChangeName = (e) => {
-        setName(e.target.value)
+        if (e.target.value === currentUser.name)
+        {
+            setIsDisabled(true)
+        } else {
+            setName(e.target.value)
+            validateName({setIsDisabled})
+        }
+
     }
 
     const handleChangeEmail = (e) => {
-        setEmail(e.target.value)
+        if (e.target.value === currentUser.email) {
+            setIsDisabled(true)
+        } else {
+            setEmail(e.target.value)
+            validateEmail({setIsDisabled})
+        }
     }
 
     const handleSubmit = (e) => {
@@ -31,6 +45,10 @@ function Profile(props) {
             name: name
         });
     }
+
+    React.useEffect(()=> {
+
+    }, [currentUser])
 
     return (<>
             <Header logoClassName="logo" children={<>
@@ -52,20 +70,27 @@ function Profile(props) {
                 <form onSubmit={handleSubmit}>
                     <h1 className="profile__title">Привет, {props.userName}!</h1>
                     <div className="profile__inputs">
-                        <div className="profile__row" >
-                            <label className="profile__table-title" htmlFor="userName">Имя</label>
-                            <input className="profile__table-info" defaultValue={name || ""} id="userName" onChange={handleChangeName}/>
+                        <div className="profile__row">
+                            <label className="profile__table-title" htmlFor="name">Имя</label>
+                            <input className="profile__table-info" defaultValue={name || ""} id="name"
+                                   onChange={handleChangeName}/>
+                            <div className="profile__error" id="nameErr"></div>
                         </div>
+
                         <div className="profile__row">
                             <label className="profile__table-title" htmlFor="email">E-mail</label>
-                            <input className="profile__table-info" defaultValue={email || ""} id="email" onChange={handleChangeEmail}/>
+                            <input className="profile__table-info" defaultValue={email || ""} id="email"
+                                   onChange={handleChangeEmail}/>
+                            <div className="profile__error" id="emailErr"></div>
                         </div>
+
                     </div>
                     <div className="profile__buttons">
-                        <button className="profile__button-edit" type="submit">Редактировать
+                        <button className="profile__button-edit" type="submit" disabled={isDisabled}>Редактировать
                         </button>
                         <Link to="/signin">
-                            <button className="profile__button-logout" onClick={props.onClickLogout}>Выйти из аккаунта</button>
+                            <button className="profile__button-logout" onClick={props.onClickLogout}>Выйти из аккаунта
+                            </button>
                         </Link>
                     </div>
                 </form>

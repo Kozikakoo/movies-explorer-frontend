@@ -107,7 +107,7 @@ function App() {
     }
 
     const handleUpdateUser = (currentUser) => {
-        mainApi.editProfile(currentUser.email, currentUser.name )
+        mainApi.editProfile(currentUser.email, currentUser.name)
             .then((res) => {
                 setCurrentUser(res);
             })
@@ -117,6 +117,7 @@ function App() {
     let foundShortFilms = []
 
     const handleSearchFilm = (valueSearchInput) => {
+        validateSearchInput();
         let foundFilms = []
         setIsLoading(true);
         moviesApi.getMovies()
@@ -169,7 +170,6 @@ function App() {
     }
 
     React.useEffect(() => {
-        setIsLoading(true);
         mainApi.getSavedMovies()
             .then((res) =>
                 setSavedMovies(res)

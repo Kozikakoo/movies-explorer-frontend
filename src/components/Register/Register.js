@@ -3,11 +3,11 @@ import Form from "../Form/Form";
 import {validateEmail, validateName, validatePassword} from "../../utils/validation";
 
 function Register(props) {
+    const [isDisabled, setIsDisabled] = React.useState(true)
     const [data, setData] = React.useState({
         password: '',
         email: '',
         name: ''
-
     });
 
     const handleChange = (e) => {
@@ -20,27 +20,30 @@ function Register(props) {
 
     const handleChangeName = (e) => {
         handleChange(e)
-        validateName()
+        validateName({setIsDisabled})
     }
 
     const handleChangePassword = (e) => {
         handleChange(e)
-        validatePassword()
+        validatePassword({setIsDisabled})
     }
 
     const handleChangeEmail = (e) => {
         handleChange(e)
-        validateEmail()
+        validateEmail({setIsDisabled})
     }
 
-
     const handleSubmitRegister = () => {
-        console.log("yes")
         const {password, email, name} = data;
         props.onRegister({password, email, name})
     };
 
-
+    React.useEffect(() => {
+        const {password, email, name} = data;
+        if (!email || !password || !name) {
+            setIsDisabled(true)
+        }
+    }, [data])
 
     return (
         <Form email={data.email} password={data.password} children={<><label className="form__label" htmlFor="name">Имя</label>
@@ -50,7 +53,7 @@ function Register(props) {
               submitButton="Зарегистрироваться" question="Уже зарегистрированы?" linkText="Войти" link="/signin"
               submitClassName="form__submit-reg"
               onChangePassword={handleChangePassword}
-              onChangeEmail={handleChangeEmail} onSubmit={handleSubmitRegister}/>
+              onChangeEmail={handleChangeEmail} onSubmit={handleSubmitRegister} isDisabled={isDisabled}/>
     )
 }
 
