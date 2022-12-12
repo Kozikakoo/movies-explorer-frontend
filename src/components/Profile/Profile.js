@@ -7,33 +7,32 @@ import {validateEmail, validateName} from "../../utils/validation";
 
 function Profile(props) {
     const currentUser = React.useContext(CurrentUserContext);
-    const [name, setName] = React.useState('')
-    const [email, setEmail] = React.useState('')
+    const [data, setData] = React.useState({
+        email: '',
+        name: ''
+    });
     const [isDisabled, setIsDisabled] = React.useState(true)
 
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setData({
+            ...data,
+            [name]: value
+        });
+    }
+
     React.useEffect(() => {
-        setName(currentUser.name);
-        setEmail(currentUser.email);
+        setData({name: currentUser.name, email: currentUser.email})
     }, [currentUser]);
 
     const handleChangeName = (e) => {
-        if (e.target.value === currentUser.name)
-        {
-            setIsDisabled(true)
-        } else {
-            setName(e.target.value)
-            validateName({setIsDisabled})
-        }
-
+        handleChange(e)
+        validateName({setIsDisabled})
     }
 
     const handleChangeEmail = (e) => {
-        if (e.target.value === currentUser.email) {
-            setIsDisabled(true)
-        } else {
-            setEmail(e.target.value)
-            validateEmail({setIsDisabled})
-        }
+        handleChange(e)
+        validateEmail({setIsDisabled})
     }
 
     const handleSubmit = (e) => {
@@ -41,14 +40,17 @@ function Profile(props) {
         e.preventDefault();
         // Передаём значения управляемых компонентов во внешний обработчик
         props.onUpdateUser({
-            email: email,
-            name: name
+            email: data.email,
+            name: data.name
         });
     }
 
-    React.useEffect(()=> {
-
-    }, [currentUser])
+    React.useEffect(() => {
+        const {email, name} = data;
+        if ((!email || !name) || (email === currentUser.email && name === currentUser.name)) {
+            setIsDisabled(true)
+        }
+    }, [data])
 
     return (<>
             <Header logoClassName="logo" children={<>
@@ -72,14 +74,14 @@ function Profile(props) {
                     <div className="profile__inputs">
                         <div className="profile__row">
                             <label className="profile__table-title" htmlFor="name">Имя</label>
-                            <input className="profile__table-info" defaultValue={name || ""} id="name"
+                            <input className="profile__table-info" name="name" value={data.name || ""} id="name"
                                    onChange={handleChangeName}/>
                             <div className="profile__error" id="nameErr"></div>
                         </div>
 
                         <div className="profile__row">
                             <label className="profile__table-title" htmlFor="email">E-mail</label>
-                            <input className="profile__table-info" defaultValue={email || ""} id="email"
+                            <input className="profile__table-info" name="email" value={data.email || ""} id="email"
                                    onChange={handleChangeEmail}/>
                             <div className="profile__error" id="emailErr"></div>
                         </div>
