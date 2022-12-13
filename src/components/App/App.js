@@ -17,7 +17,6 @@ import {searchFilms} from "../../utils/SearchFilms";
 import ProtectedRoute from "../ProtectedRoute";
 import Header from "../Header/Header";
 
-
 function App() {
     const [moviesCards, setMoviesCards] = React.useState([])
     const [isEditUser, setIsEditUser] = React.useState(false)
@@ -44,9 +43,11 @@ function App() {
     const handleCheckbox = () => {
         if (checkboxInput.checked === true) {
             setIsCheckShortMovie(true)
-            console.log(true)
+            localStorage.setItem("checkbox", "true")
+        } else {setIsCheckShortMovie(false)
+            localStorage.removeItem("checkbox")
+        }
 
-        } else setIsCheckShortMovie(false)
     }
 
     const handleLogin = ({password, email}) => {
@@ -114,55 +115,34 @@ function App() {
             .catch(console.log)
     }
 
-    let foundShortFilms = []
-
     const handleSearchFilm = (valueSearchInput) => {
-        validateSearchInput();
         let foundFilms = []
         setIsLoading(true);
         moviesApi.getMovies()
             .then((res) => {
                     let newRegex = searchFilms(valueSearchInput)
-                    for (let i = 0; i < res.length; i++) {
-                        const stringRes = JSON.stringify(res[i])
-                        if (newRegex.test(stringRes) && isCheckShortMovie === true) {
-                            if (res[i].duration < 41)
-                                foundFilms.push(res[i])
-                        } else if (newRegex.test(stringRes) && isCheckShortMovie === false) {
-                            foundFilms.push(res[i])
-                        }
+                for (let i = 0; i < res.length; i++) {
+                    const stringRes = JSON.stringify(res[i])
+                    if (newRegex.test(stringRes) && isCheckShortMovie === true && res[i].duration < 41) {
+                        foundFilms.push(res[i])
+                    } else if (newRegex.test(stringRes) && isCheckShortMovie === false) {
+                        foundFilms.push(res[i])
                     }
-                    setMoviesCards(foundFilms)
-                    console.log(foundFilms)
-                    localStorage.setItem("foundFilms", JSON.stringify(foundFilms))
-                    // if(window.innerWidth>768) {
-                    //
-                    //     for (let k=0; k < 8; k++) {
-                    //         newMoviesCards.push(res[k])
-                    //     }
-                    //
-                    // }
-                    // if(window.innerWidth>320)     {
-                    //     for (let i=0; i < 4; i++) {
-                    //         newMoviesCards.push(moviesCards[i])
-                    //     }}
-                    // for (let i=0; i < 2; i++) {
-                    //     newMoviesCards.push(moviesCards[i])
-                    // }
-
+                }
+                setMoviesCards(foundFilms)
+                localStorage.setItem("foundFilms", JSON.stringify(foundFilms))
+                // res.forEach((movie)=> {
+                //     if(isCheckShortMovie === false && (movie.nameRU === valueSearchInput || movie.nameEN === valueSearchInput)) {
+                //         foundFilms.push(movie)
+                //     }
+                //     else if(isCheckShortMovie === true && (movie.nameRU === valueSearchInput || movie.nameEN === valueSearchInput) && (movie.duration<41)) {
+                //         foundFilms.push(movie)
+                //     }
+                // })
+                // setMoviesCards(foundFilms)
 
                 }
             )
-            // .then(() => {
-            //     for (let i = 0; i < foundFilms.length; i++) {
-            //         if (foundFilms[i].duration < 41) {
-            //             foundShortFilms.push(foundFilms[i])
-            //         }
-            //     }
-            //     console.log(foundShortFilms)
-            //     setMoviesCard(foundShortFilms)
-            //     localStorage.setItem("foundShortFilms", JSON.stringify(foundShortFilms))
-            // })
             .catch(console.log)
             .finally(() => {
                 setIsLoading(false);
@@ -240,7 +220,11 @@ function App() {
                                         component={Movies}
                                         loggedIn={loggedIn}
                                         movies={moviesCards}
-                                        setMoviesCards={(savedFilms) => setMoviesCards(JSON.parse(savedFilms))}
+                                        setMoviesCards={(foundFilms) => {setMoviesCards(JSON.parse(foundFilms))
+                                        if (localStorage.getItem("checkbox") === "true") {
+                                            document.querySelector(".form-switch__text").setAttribute("checked", "true")
+                                        }
+                                        }}
                                         onClick={handleOpenMenuPopupClick}
                                         onSubmitSearch={handleSearchFilm} isLoading={isLoading}
                                         onChangeSearchInput={validateSearchInput} like={handleSaveMovie}
@@ -272,7 +256,7 @@ function App() {
                                         movies={moviesCards} savedMovies={savedMovies}
                                         onClick={handleOpenMenuPopupClick}
                                         onSubmitSearch={handleSearchFilm} isLoading={isLoading}
-                                        onChangeSearchInput={validateSearchInput} onClickCheckbox={handleCheckbox}
+                                        onClickCheckbox={handleCheckbox}
                                         isOpen={isOpen && ("popup-menu__open")}
                                         onClickClosedPopup={handleCloseMenuPopupClick}
                         />

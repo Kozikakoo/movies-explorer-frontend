@@ -1,8 +1,11 @@
 import React from "react";
 import {mainApi} from "../../utils/MainApi";
+import {useHistory} from 'react-router-dom';
 
 function MoviesCard(props) {
     const [like, setLike] = React.useState(false)
+    const [savedMovies, setSavedMovies] = React.useState([])
+    const history = useHistory();
 
     const cardLikeButtonClassName = "like-button";
     const cardNoLikeButtonClassName = "nolike-button";
@@ -10,7 +13,7 @@ function MoviesCard(props) {
     const handleButtonDeleteClick = () => {
         mainApi.deleteMovie(props.movie._id)
             .then((res)=> {
-
+                history.go(0)
                 console.log(res)
             })
             .catch(console.log)
@@ -19,7 +22,6 @@ function MoviesCard(props) {
     const handleButtonLikeClick = () => {
         if (like) {
             setLike(false)
-
         } else setLike(true)
         mainApi.addMovies(
             props.movie.country,
@@ -34,11 +36,17 @@ function MoviesCard(props) {
             `https://api.nomoreparties.co/${props.movie.image.formats.thumbnail.url}`,
             props.movie.movieId
         )
-            .then((savedMovie) => {
-                console.log(savedMovie)
-            })
+            .then((movie) => {
+                console.log(movie)
+                setSavedMovies([...savedMovies, movie])
+                }
+        )
             .catch(console.log)
     }
+
+    React.useEffect(()=>{
+        console.log(savedMovies)
+    }, [savedMovies])
 
     return (
         <li className="movies-card">

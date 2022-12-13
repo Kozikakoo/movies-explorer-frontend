@@ -2,8 +2,6 @@ import React from "react";
 
 function FilterCheckbox(props) {
 
-
-
     const handleCheckboxClick = () => {
         props.onClickCheckbox()
     }

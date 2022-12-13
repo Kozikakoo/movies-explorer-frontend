@@ -13,7 +13,6 @@ function Movies(props) {
         setMoviesRoute(true)
     }, [])
 
-
     React.useEffect(() => {
         let savedFilms = localStorage.getItem("foundFilms")
         props.setMoviesCards(savedFilms)
@@ -36,7 +35,7 @@ function Movies(props) {
                 </Link>
             </>}/>
             <main>
-                <SearchForm onSubmitSearchFilm={props.onSubmitSearch} onChangeSearchInput={props.onChangeSearchInput}
+                <SearchForm onSubmitSearchFilm={props.onSubmitSearch}
                             onClickCheckbox={props.onClickCheckbox}/>
                 <MoviesCardList movies={props.movies} isLoading={props.isLoading} like={props.like}
                                 moviesRoute={moviesRoute}/>
