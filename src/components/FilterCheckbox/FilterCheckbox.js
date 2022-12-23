@@ -9,7 +9,7 @@ function FilterCheckbox(props) {
 
     return(
             <label className="form-switch">
-                <input type="checkbox" className="form-switch__text" onClick={handleCheckboxClick}/>
+                <input type="checkbox" className="form-switch__text" onClick={handleCheckboxClick} />
                     <i></i>Короткометражки</label>
 
 

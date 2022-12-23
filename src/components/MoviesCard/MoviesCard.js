@@ -1,28 +1,35 @@
 import React from "react";
 import {mainApi} from "../../utils/MainApi";
-import {useHistory} from 'react-router-dom';
 
 function MoviesCard(props) {
-    const [like, setLike] = React.useState(false)
-    const [savedMovies, setSavedMovies] = React.useState([])
-    const history = useHistory();
+    const [clicks, setClicks] = React.useState(false)
+    const foundFilms = ()=>{
+        let films = localStorage.getItem("foundFilms")
+        return (JSON.parse(films))
+    }
+
 
     const cardLikeButtonClassName = "like-button";
     const cardNoLikeButtonClassName = "nolike-button";
 
+
     const handleButtonDeleteClick = () => {
         mainApi.deleteMovie(props.movie._id)
-            .then((res)=> {
-                history.go(0)
-                console.log(res)
+            .then(() => {
+                props.setSavedMovies(props.movie._id)
             })
             .catch(console.log)
     }
 
     const handleButtonLikeClick = () => {
-        if (like) {
-            setLike(false)
-        } else setLike(true)
+        if (clicks) {
+            console.log(props.movie)
+            mainApi.deleteMovie(props.movie._id)
+                .then(() => {
+                })
+                .catch(console.log)
+            setClicks(false)
+        } else setClicks(true)
         mainApi.addMovies(
             props.movie.country,
             props.movie.director,
@@ -36,17 +43,22 @@ function MoviesCard(props) {
             `https://api.nomoreparties.co/${props.movie.image.formats.thumbnail.url}`,
             props.movie.movieId
         )
-            .then((movie) => {
-                console.log(movie)
-                setSavedMovies([...savedMovies, movie])
-                }
-        )
+            .then((newMovie) => {
+                props.setSavedMovies(newMovie)
+            })
             .catch(console.log)
     }
 
-    React.useEffect(()=>{
-        console.log(savedMovies)
-    }, [savedMovies])
+    // React.useEffect(() => {
+    //     for (let i = 0; i<foundFilms().length; i++){
+    //                 for (let j = 0; j<props.savedMovies.length; j++) {
+    //                     if (foundFilms()[i].nameRU === props.savedMovies[j].nameRU) {
+    //
+    //                     }
+    //                 }
+    //             }
+    //
+    // }, [])
 
     return (
         <li className="movies-card">
@@ -58,7 +70,7 @@ function MoviesCard(props) {
             </a>
             <div className="movies-card__block">
                 <h2 className="movies-card__title">{props.movie.nameRU}</h2>
-                {props.moviesRoute ? <button className={like ? cardLikeButtonClassName : cardNoLikeButtonClassName}
+                {props.moviesRoute ? <button className={clicks ? cardLikeButtonClassName : cardNoLikeButtonClassName}
                                              onClick={handleButtonLikeClick} type="button"></button> :
                     <button className="delete-button" type="button" onClick={handleButtonDeleteClick}></button>}
             </div>

@@ -9,14 +9,24 @@ import PopupMenu from "../PopupMenu/PopupMenu";
 function Movies(props) {
     const [moviesRoute, setMoviesRoute] = React.useState(false)
 
+   const foundFilms = ()=>{
+       let films = localStorage.getItem("foundFilms")
+       return (JSON.parse(films))
+   }
+
     React.useEffect(() => {
         setMoviesRoute(true)
     }, [])
 
     React.useEffect(() => {
-        let savedFilms = localStorage.getItem("foundFilms")
-        props.setMoviesCards(savedFilms)
+        if (foundFilms()) {
+            props.setMoviesCards(foundFilms())
+            if (localStorage.getItem("checkbox") === "true") {
+                document.querySelector(".form-switch__text").setAttribute("checked", "true")
+            }
+        }
     }, [])
+
 
     return (<>
             <Header logoClassName="logo" children={<>
@@ -38,10 +48,10 @@ function Movies(props) {
                 <SearchForm onSubmitSearchFilm={props.onSubmitSearch}
                             onClickCheckbox={props.onClickCheckbox}/>
                 <MoviesCardList movies={props.movies} isLoading={props.isLoading} like={props.like}
-                                moviesRoute={moviesRoute}/>
+                                moviesRoute={moviesRoute} savedMovies={props.savedMovies} setSavedMovies={props.setSavedMovies}/>
             </main>
             <Footer/>
-        <PopupMenu isOpen={props.isOpen} onClickClosedPopup={props.onClickClosedPopup}/>
+            <PopupMenu isOpen={props.isOpen} onClickClosedPopup={props.onClickClosedPopup}/>
         </>
 
     )

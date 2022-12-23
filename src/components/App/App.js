@@ -7,8 +7,7 @@ import Profile from "../Profile/Profile";
 import Movies from "../Movies/Movies";
 import NotFound from "../NotFound/NotFound";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import PopupMenu from "../PopupMenu/PopupMenu";
-import {validateName, validatePassword, validateEmail, validateSearchInput} from "../../utils/validation"
+import {validateSearchInput} from "../../utils/validation"
 import {moviesApi} from "../../utils/MoviesApi";
 import {mainApi} from "../../utils/MainApi";
 import * as auth from "../../utils/auth"
@@ -22,14 +21,14 @@ function App() {
     const [isEditUser, setIsEditUser] = React.useState(false)
     const [isOpen, setIsOpen] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(false)
-    const [userData, setUserData] = React.useState({})
     const [loggedIn, setLoggedIn] = React.useState(false)
     const [currentUser, setCurrentUser] = React.useState({})
     const [savedMovies, setSavedMovies] = React.useState([])
-    const [newMoviesCards, setNewMoviesCards] = React.useState([])
     const [isCheckShortMovie, setIsCheckShortMovie] = React.useState(false)
     const checkboxInput = document.querySelector(".form-switch__text");
     const history = useHistory();
+    // const [likedMovies, setLikedMovies] = React.useState([])
+    //
 
 
     const handleOpenMenuPopupClick = () => {
@@ -44,19 +43,20 @@ function App() {
         if (checkboxInput.checked === true) {
             setIsCheckShortMovie(true)
             localStorage.setItem("checkbox", "true")
-        } else {setIsCheckShortMovie(false)
+        } else {
+            setIsCheckShortMovie(false)
             localStorage.removeItem("checkbox")
         }
 
     }
 
     const handleLogin = ({password, email}) => {
-        setUserData({password, email})
         auth.authorize(password, email)
             .then((data) => {
                     if (data.token) {
                         localStorage.setItem("token", data.token)
                         history.push('/')
+                        history.go(0)
                         setLoggedIn(true)
                         return data.token
                     }
@@ -104,9 +104,22 @@ function App() {
     const handleLogout = () => {
         setLoggedIn(false)
         localStorage.removeItem("token")
+        localStorage.removeItem("foundFilms")
+        localStorage.removeItem("checkbox")
         history.push("/")
     }
 
+    const handleDeleteSavedMovies = (movieId) => {
+        setSavedMovies((savedMovies) => savedMovies.filter((m) => (m._id !== movieId)))
+    }
+    //
+    // const addSavedMovies =(newMovie, movieName)=> {
+    //     setSavedMovies((savedMovies)=> savedMovies.map((c) => console.log(c.nameRU)))
+    // }
+    // const handleMovieLike = () => {
+    //
+    // }
+    // (c.nameRU === movieName) ? newMovie :
     const handleUpdateUser = (currentUser) => {
         mainApi.editProfile(currentUser.email, currentUser.name)
             .then((res) => {
@@ -121,25 +134,25 @@ function App() {
         moviesApi.getMovies()
             .then((res) => {
                     let newRegex = searchFilms(valueSearchInput)
-                for (let i = 0; i < res.length; i++) {
-                    const stringRes = JSON.stringify(res[i])
-                    if (newRegex.test(stringRes) && isCheckShortMovie === true && res[i].duration < 41) {
-                        foundFilms.push(res[i])
-                    } else if (newRegex.test(stringRes) && isCheckShortMovie === false) {
-                        foundFilms.push(res[i])
+                    for (let i = 0; i < res.length; i++) {
+                        const stringRes = JSON.stringify(res[i])
+                        if (newRegex.test(stringRes) && isCheckShortMovie === true && res[i].duration < 41) {
+                            foundFilms.push(res[i])
+                        } else if (newRegex.test(stringRes) && isCheckShortMovie === false) {
+                            foundFilms.push(res[i])
+                        }
                     }
-                }
-                setMoviesCards(foundFilms)
-                localStorage.setItem("foundFilms", JSON.stringify(foundFilms))
-                // res.forEach((movie)=> {
-                //     if(isCheckShortMovie === false && (movie.nameRU === valueSearchInput || movie.nameEN === valueSearchInput)) {
-                //         foundFilms.push(movie)
-                //     }
-                //     else if(isCheckShortMovie === true && (movie.nameRU === valueSearchInput || movie.nameEN === valueSearchInput) && (movie.duration<41)) {
-                //         foundFilms.push(movie)
-                //     }
-                // })
-                // setMoviesCards(foundFilms)
+                    setMoviesCards(foundFilms)
+                    localStorage.setItem("foundFilms", JSON.stringify(foundFilms))
+                    // res.forEach((movie)=> {
+                    //     if(isCheckShortMovie === false && (movie.nameRU === valueSearchInput || movie.nameEN === valueSearchInput)) {
+                    //         foundFilms.push(movie)
+                    //     }
+                    //     else if(isCheckShortMovie === true && (movie.nameRU === valueSearchInput || movie.nameEN === valueSearchInput) && (movie.duration<41)) {
+                    //         foundFilms.push(movie)
+                    //     }
+                    // })
+                    // setMoviesCards(foundFilms)
 
                 }
             )
@@ -160,12 +173,24 @@ function App() {
             })
     }, [])
 
-    React.useEffect(() => {
-        mainApi.getProfile()
-            .then((userData) =>
-                setCurrentUser(userData))
-            .catch(console.log)
-    }, [])
+
+    // React.useEffect(()=> {
+    //     let result = []
+    //     for (let i = 0; i<foundFilms().length; i++){
+    //         for (let j = 0; j<savedMovies.length; j++) {
+    //             if (foundFilms()[i].nameRU === savedMovies[j].nameRU) {
+    //                 result.push(foundFilms()[i])
+    //             }
+    //         }
+    //     }
+    //    setLikedMovies(result)
+    // },[])
+    //
+
+    const handleLikeMovie = (newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies])
+    }
+
 
     const tokenCheck = () => {
         if (localStorage.getItem("token")) {
@@ -181,6 +206,15 @@ function App() {
                 .catch(console.log)
         }
     }
+
+    React.useEffect(() => {
+        mainApi.getProfile()
+            .then((userData) =>
+                setCurrentUser(userData)
+            )
+            .catch(console.log)
+    }, [])
+
 
     React.useEffect(() => {
         tokenCheck()
@@ -220,17 +254,15 @@ function App() {
                                         component={Movies}
                                         loggedIn={loggedIn}
                                         movies={moviesCards}
-                                        setMoviesCards={(foundFilms) => {setMoviesCards(JSON.parse(foundFilms))
-                                        if (localStorage.getItem("checkbox") === "true") {
-                                            document.querySelector(".form-switch__text").setAttribute("checked", "true")
-                                        }
-                                        }}
                                         onClick={handleOpenMenuPopupClick}
+                                        setMoviesCards={setMoviesCards}
                                         onSubmitSearch={handleSearchFilm} isLoading={isLoading}
                                         onChangeSearchInput={validateSearchInput} like={handleSaveMovie}
                                         onClickCheckbox={handleCheckbox}
                                         isOpen={isOpen && ("popup-menu__open")}
                                         onClickClosedPopup={handleCloseMenuPopupClick}
+                                        setSavedMovies={(newMovie) => handleLikeMovie(newMovie)}
+                                        savedMovies={savedMovies}
                         />
                         <Route path="/signup">
                             <Register onRegister={handleRegister}/>
@@ -253,7 +285,8 @@ function App() {
                         <ProtectedRoute path="/saved-movies"
                                         component={SavedMovies}
                                         loggedIn={loggedIn}
-                                        movies={moviesCards} savedMovies={savedMovies}
+                                        savedMovies={savedMovies}
+                                        setSavedMovies={(movieId) => handleDeleteSavedMovies(movieId)}
                                         onClick={handleOpenMenuPopupClick}
                                         onSubmitSearch={handleSearchFilm} isLoading={isLoading}
                                         onClickCheckbox={handleCheckbox}

@@ -4,13 +4,13 @@ import {Link} from "react-router-dom";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import DeleteButton from "../DeleteButton/DeleteButton";
 import Preloader from "../Preloader/Preloader";
 import PopupMenu from "../PopupMenu/PopupMenu";
+import {handleMoreImage, moviePerRow} from "../../utils/buildAdaptiveGrid";
 
 
 function SavedMovies(props) {
-
+    const [next, setNext] = React.useState(moviePerRow);
 
     return (
         <>
@@ -32,15 +32,18 @@ function SavedMovies(props) {
             <main>
                 <SearchForm onSubmitSearchFilm={props.onSubmitSearchFilm}/>
                 {props.isLoading ? <Preloader/> :
-                <ul className="saved-movies">
-                    {props.savedMovies.slice(0, 10).map((movie) =>
-                        <MoviesCard children={<DeleteButton/>} movie={{
-                            nameRU: movie.nameRU,
-                            image: movie.image,
-                            duration: movie.duration,
-                            _id: movie._id
-                        }}/>)}
-                </ul>}
+                    <ul className="saved-movies">
+                        {props.savedMovies.slice(0, next).map((movie) =>
+                            <MoviesCard setSavedMovies={props.setSavedMovies} movie={{
+                                nameRU: movie.nameRU,
+                                image: movie.image,
+                                duration: movie.duration,
+                                _id: movie._id,
+                                trailerLink: movie.trailerLink
+                            }}/>)}
+                    </ul>}
+                {next < props.savedMovies.length &&
+                    <button className="card-list__more" onClick={() => handleMoreImage(setNext, next)}>Ещё</button>}
             </main>
             <Footer/>
             <PopupMenu isOpen={props.isOpen} onClickClosedPopup={props.onClickClosedPopup}/>
